@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "../../assets/logo.png";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [loginModal, setLoginModal] = useState(false);
@@ -12,10 +13,10 @@ const Navbar = () => {
       <nav className="bg-black/80 text-white py-3">
         <div className="container mx-auto flex justify-between items-center relative">
           <div>
-            <ul className="flex gap-2">
-              <li>Home</li>
-              <li>TV Shows</li>
-              <li>Movies</li>
+            <ul className="flex gap-4 text-md">
+              <li><Link to={'/'}>Home</Link></li>
+              <li><Link to={'/shows'}>TV Shows</Link></li>
+              <li><Link to={'/movies'}>Movies</Link></li>
             </ul>
           </div>
           <div className="w-24 ">
