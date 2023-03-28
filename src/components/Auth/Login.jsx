@@ -1,7 +1,7 @@
-const Login = ({ className }) => {
+const Login = ({ className, toRegis }) => {
   return (
     <div
-      className={`absolute mt-3 rounded-md top-full right-0 bg-black/80 w-72 text-white p-5 ${className}`}
+      className={`absolute rounded-md mt-28  bg-black/80 w-72 text-white p-5 ${className}`}
     >
       <h2 className="font-semibold text-lg mb-4">LOGIN</h2>
       <form>
@@ -29,7 +29,7 @@ const Login = ({ className }) => {
 
         <p className="text-sm text-center">
           don't have an account? click{" "}
-          <span className="font-semibold">Here</span>
+          <span className="font-semibold cursor-pointer"  onClick={toRegis}>Here</span>
         </p>
       </form>
     </div>

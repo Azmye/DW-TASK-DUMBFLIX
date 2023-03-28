@@ -1,7 +1,7 @@
-const Register = ({ className }) => {
+const Register = ({ className, toLogin }) => {
   return (
     <div
-      className={`absolute mt-3 rounded-md top-full right-0 bg-black/80 w-72 text-white p-5 ${className}`}
+      className={`absolute mt-10 rounded-md  bg-black/80 w-72 text-white p-5 ${className}`}
     >
       <h2 className="font-semibold text-lg mb-4">REGISTER</h2>
       <form>
@@ -65,7 +65,7 @@ const Register = ({ className }) => {
 
         <p className="text-sm text-center">
           Already have an account? click{" "}
-          <span className="font-semibold">Here</span>
+          <span className="font-semibold cursor-pointer" onClick={toLogin}>Here</span>
         </p>
       </form>
     </div>

@@ -10,7 +10,7 @@ const Hero = ({heroImage, heroTitle, heroDesc, heroCateg}) => {
           </p>
           <div className="flex gap-2 mb-3">
             <p>2019</p>
-            <p className="border border-1 px-1 rounded-md">{heroCateg}</p>
+            <p className="border border-1 px-2 rounded-md">{heroCateg}</p>
           </div>
           <button className="bg-red-700 w-1/4 py-3 text-lg font-semibold rounded-md shadow-md shadow-slate-900">
             WATCH NOW !

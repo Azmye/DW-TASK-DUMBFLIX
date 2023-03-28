@@ -1,12 +1,13 @@
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import Login from "../Auth/Login";
-import Register from "../Auth/Register";
 import { Link } from "react-router-dom";
+import Register from "../Auth/Register";
 
 const Navbar = () => {
-  const [loginModal, setLoginModal] = useState(false);
-  const [registerModal, setRegisterModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false)
+  const [registerModal, setRegisterModal] = useState(false)
+  
 
   return (
     <>
@@ -23,14 +24,13 @@ const Navbar = () => {
             <img src={logo} alt="Brand Logo" className="w-full" />
           </div>
           <div className="flex gap-3 font-semibold">
-            <button
-              className="bg-white text-red-700 px-4 py-1 rounded-md"
+            <button 
               onClick={() => setRegisterModal(!registerModal)}
+              className="bg-white text-red-700 px-4 py-1 rounded-md"
             >
               Register
             </button>
-            <button
-              onClick={() => setLoginModal(!loginModal)}
+            <button onClick={() => setLoginModal(!loginModal)}
               className="text-white bg-red-700 px-4 py-1 rounded-md"
             >
               Login
@@ -39,10 +39,22 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className="container mx-auto relative z-50">
-        {loginModal && <Login />}
-        {registerModal && <Register />}
-      </div>
+      {loginModal && (<div className="relative flex justify-center">
+        <div className="absolute w-full h-[100vh] bg-zinc-900/50 z-10" onClick={() => setLoginModal(!loginModal)}></div>
+        <Login className={'z-20'} toRegis={() => {
+          setLoginModal(false)
+          setRegisterModal(true)
+        }} />
+      </div>)}
+
+      {registerModal && (<div className="relative flex justify-center">
+        <div className="absolute w-full h-[100vh] bg-zinc-900/50 z-10" onClick={() => setRegisterModal(!registerModal)}></div>
+        <Register className={'z-20'} toLogin={() => {
+          setRegisterModal(false)
+          setLoginModal(true)
+        }} />
+      </div>)}
+
     </>
   );
 };
