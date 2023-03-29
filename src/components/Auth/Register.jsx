@@ -49,9 +49,10 @@ const Register = ({ className, toLogin }) => {
 
         <select
         onChange={(e) => setGender(e.target.value)}
-        value={'Gender'}
+        value={gender}
           className="w-full mb-3 rounded-md p-1 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none"
         >
+          <option value="default" className="hidden">Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>

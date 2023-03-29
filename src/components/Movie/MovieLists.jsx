@@ -16,6 +16,7 @@ const MovieLists = ({ className, slides }) => {
           {data && data.data.results.slice(0,12).map((index) => (
             <CardItem
             key={index.id}
+            linkto={`/movie-detail/${index.id}`}
             title={index.title}
             year={new Date(index.release_date).getFullYear()}
             className={`${slides ? 'carousel-item px-5' : ''} w-48`}
