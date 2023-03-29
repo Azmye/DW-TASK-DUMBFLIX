@@ -1,22 +1,27 @@
 import { useState } from "react";
 
 const Register = ({ className, toLogin }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [fullName, setFullName] = useState('')
-  const [gender, setGender] = useState('')
-  const [address, setAddress] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const userData = {
-      email, password, fullName, gender, address, phoneNumber
-    }
+      id: localStorage.length + 1,
+      email,
+      password,
+      fullName,
+      gender,
+      address,
+      phoneNumber,
+    };
 
-    console.log(userData)
-    localStorage.setItem('User', JSON.stringify(userData))
-  }
+    localStorage.setItem(localStorage.length + 1, JSON.stringify(userData));
+  };
   return (
     <div
       className={`absolute mt-10 rounded-md  bg-black/80 w-72 text-white p-5 ${className}`}
@@ -48,11 +53,13 @@ const Register = ({ className, toLogin }) => {
         />
 
         <select
-        onChange={(e) => setGender(e.target.value)}
-        value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          value={gender}
           className="w-full mb-3 rounded-md p-1 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none"
         >
-          <option value="default" className="hidden">Gender</option>
+          <option value="default" className="hidden">
+            Gender
+          </option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
@@ -72,15 +79,15 @@ const Register = ({ className, toLogin }) => {
           className="w-full mb-3 rounded-md p-2 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none"
         ></textarea>
 
-        <button
-          className="w-full bg-white py-2 rounded-md mb-2 text-red-700 font-semibold"
-        >
+        <button className="w-full bg-white py-2 rounded-md mb-2 text-red-700 font-semibold">
           Register
         </button>
 
         <p className="text-sm text-center">
           Already have an account? click{" "}
-          <span className="font-semibold cursor-pointer" onClick={toLogin}>Here</span>
+          <span className="font-semibold cursor-pointer" onClick={toLogin}>
+            Here
+          </span>
         </p>
       </form>
     </div>

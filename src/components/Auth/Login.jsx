@@ -1,35 +1,70 @@
-const Login = ({ className, toRegis }) => {
+import { useState } from "react";
+
+const Login = ({ className, toRegis, isLoggedIn, loginModal }) => {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const localStorageKey = localStorage.length;
+    for (let i = 1; i <= localStorageKey; i++) {
+      const response = localStorage.getItem(i);
+      const users = JSON.parse(response);
+
+      // return users.email == state.email && users.password == state.password
+      //   ? isLoggedIn(true) loginModal(false)
+      //   : console.log("user not found!");
+
+      if (users.email == state.email && users.password == state.password) {
+        return isLoggedIn(true), loginModal(false);
+      } else {
+        return console.log("user not found!");
+      }
+    }
+  };
+
   return (
     <div
       className={`absolute rounded-md mt-28  bg-black/80 w-72 text-white p-5 ${className}`}
     >
       <h2 className="font-semibold text-lg mb-4">LOGIN</h2>
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <input
           type="email"
-          name=""
-          id=""
+          name="email"
+          value={state.email}
+          onChange={handleOnChange}
           className="w-full mb-3 rounded-md p-2 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none"
           placeholder="Email"
         />
         <input
           type="password"
-          name=""
-          id=""
+          name="password"
+          value={state.password}
+          onChange={handleOnChange}
           className="w-full mb-8 rounded-md p-2 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none"
           placeholder="Password"
         />
 
-        <button
-          className="w-full bg-red-700 py-2 rounded-md mb-2"
-          type="button"
-        >
+        <button className="w-full bg-red-700 py-2 rounded-md mb-2">
           Login
         </button>
 
         <p className="text-sm text-center">
           don't have an account? click{" "}
-          <span className="font-semibold cursor-pointer"  onClick={toRegis}>Here</span>
+          <span className="font-semibold cursor-pointer" onClick={toRegis}>
+            Here
+          </span>
         </p>
       </form>
     </div>
