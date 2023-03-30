@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Register = ({ className, toLogin }) => {
+const Register = ({ className, toLogin, registerModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -12,8 +12,8 @@ const Register = ({ className, toLogin }) => {
     e.preventDefault();
     const userData = {
       id: localStorage.length + 1,
-      email,
-      password,
+      email: email.toLowerCase(),
+      password: password.toLowerCase(),
       fullName,
       gender,
       address,
@@ -22,6 +22,7 @@ const Register = ({ className, toLogin }) => {
     };
 
     localStorage.setItem(localStorage.length + 1, JSON.stringify(userData));
+    registerModal(false);
   };
   return (
     <div

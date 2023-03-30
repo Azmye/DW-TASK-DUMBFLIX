@@ -21,7 +21,7 @@ const Navbar = ({ isLoggedIn, userState }) => {
             i,
             JSON.stringify({ ...user, isLoggedIn: false })
           ),
-          userState(1),
+          userState(3),
           setIsDropdown(false)
         );
       }
@@ -30,7 +30,7 @@ const Navbar = ({ isLoggedIn, userState }) => {
 
   return (
     <>
-      <nav className="bg-black/80 text-white py-3 relative">
+      <nav className="bg-zinc-800 text-white py-3 relative">
         <div className="container mx-auto flex justify-between items-center relative">
           <div>
             <ul className="flex gap-4 text-md">
@@ -75,7 +75,7 @@ const Navbar = ({ isLoggedIn, userState }) => {
 
         {/* user dropdown */}
         <div
-          className={`absolute top-full z-20 right-9 text-black mt-1 ${
+          className={`absolute top-full z-20 right-9 text-zinc-800 mt-1 ${
             isDropdown ? "" : "hidden"
           }`}
         >
@@ -83,14 +83,20 @@ const Navbar = ({ isLoggedIn, userState }) => {
         </div>
         <div
           onMouseLeave={() => setIsDropdown(false)}
-          className={`absolute w-40 top-full right-7 mt-4 rounded-md py-2 bg-black z-10 ${
+          className={`absolute w-40 top-full right-7 mt-4 rounded-md py-2 bg-zinc-800 z-10 ${
             isDropdown ? "" : "hidden"
           }`}
         >
-          <Link className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2">
+          <Link
+            to={"/profile"}
+            className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2"
+          >
             <FaRegUser className="text-xl text-red-700" /> Profile
           </Link>
-          <Link className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2">
+          <Link
+            to={"/user-payment"}
+            className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2"
+          >
             <FaFileInvoiceDollar className="text-xl text-red-700" /> Pay
           </Link>
           <hr className="w-full h-2" />
@@ -128,6 +134,7 @@ const Navbar = ({ isLoggedIn, userState }) => {
             onClick={() => setRegisterModal(!registerModal)}
           ></div>
           <Register
+            registerModal={setRegisterModal}
             className={"z-20"}
             toLogin={() => {
               setRegisterModal(false);

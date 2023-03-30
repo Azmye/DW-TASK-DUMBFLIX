@@ -21,17 +21,16 @@ const Login = ({ className, toRegis, loginModal, userState }) => {
       const response = localStorage.getItem(i);
       const users = JSON.parse(response);
 
-      if (users.email == state.email && users.password == state.password) {
-        return (
-          loginModal(false),
+      if (
+        users.email == state.email.toLowerCase() &&
+        users.password == state.password.toLowerCase()
+      ) {
+        loginModal(false),
           localStorage.setItem(
             i,
             JSON.stringify({ ...users, isLoggedIn: true })
           ),
-          userState(2)
-        );
-      } else {
-        return console.log("user not found!");
+          userState(5);
       }
     }
   };

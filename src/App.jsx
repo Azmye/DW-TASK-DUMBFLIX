@@ -5,11 +5,14 @@ import Movies from "./pages/Movies";
 import Shows from "./pages/Shows";
 import DetailsItem from "./components/DetailsItem";
 import { useEffect, useState } from "react";
+import Profile from "./components/User/Profile";
+import UserPayment from "./components/Payment/UserPayment";
 
 const App = () => {
   document.body.classList = "bg-black";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userState, setUserState] = useState(0);
+  console.log(userState);
 
   useEffect(() => {
     // checking if there is user currently login
@@ -17,9 +20,9 @@ const App = () => {
       const response = localStorage.getItem(i);
       const user = JSON.parse(response);
       if (user.isLoggedIn == true) {
-        return setIsLoggedIn(true);
+        setIsLoggedIn(true), setUserState(1);
       } else {
-        return setIsLoggedIn(false);
+        setIsLoggedIn(false);
       }
     }
   }, [userState]);
@@ -32,6 +35,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/shows" element={<Shows />} />
+          <Route path="/profile" element={<Profile userState={userState} />} />
+          <Route path="/user-payment" element={<UserPayment />} />
           <Route
             path="/shows-detail/:id"
             element={<DetailsItem endpoint={"/tv/"} />}
