@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = ({ className, toRegis, isLoggedIn, loginModal }) => {
+const Login = ({ className, toRegis, loginModal, userState }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -21,12 +21,15 @@ const Login = ({ className, toRegis, isLoggedIn, loginModal }) => {
       const response = localStorage.getItem(i);
       const users = JSON.parse(response);
 
-      // return users.email == state.email && users.password == state.password
-      //   ? isLoggedIn(true) loginModal(false)
-      //   : console.log("user not found!");
-
       if (users.email == state.email && users.password == state.password) {
-        return isLoggedIn(true), loginModal(false);
+        return (
+          loginModal(false),
+          localStorage.setItem(
+            i,
+            JSON.stringify({ ...users, isLoggedIn: true })
+          ),
+          userState(2)
+        );
       } else {
         return console.log("user not found!");
       }

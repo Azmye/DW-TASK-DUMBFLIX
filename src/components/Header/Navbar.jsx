@@ -1,18 +1,36 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import Login from "../Auth/Login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Register from "../Auth/Register";
-import { FaUser } from "react-icons/fa";
+import { FaFileInvoiceDollar, FaRegUser, FaUser } from "react-icons/fa";
+import { BsFillTriangleFill } from "react-icons/bs";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, userState }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isDropdown, setIsDropdown] = useState(false);
+
+  const handleOnLogout = () => {
+    for (let i = 1; i <= localStorage.length; i++) {
+      const response = localStorage.getItem(i);
+      const user = JSON.parse(response);
+      if (user.isLoggedIn == true) {
+        return (
+          localStorage.setItem(
+            i,
+            JSON.stringify({ ...user, isLoggedIn: false })
+          ),
+          userState(1),
+          setIsDropdown(false)
+        );
+      }
+    }
+  };
 
   return (
     <>
-      <nav className="bg-black/80 text-white py-3">
+      <nav className="bg-black/80 text-white py-3 relative">
         <div className="container mx-auto flex justify-between items-center relative">
           <div>
             <ul className="flex gap-4 text-md">
@@ -32,7 +50,10 @@ const Navbar = () => {
           </div>
           {isLoggedIn ? (
             <div className="ml-40">
-              <FaUser />
+              <FaUser
+                className="cursor-pointer"
+                onMouseOver={() => setIsDropdown(true)}
+              />
             </div>
           ) : (
             <div className="flex gap-3 font-semibold">
@@ -51,6 +72,35 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
+        {/* user dropdown */}
+        <div
+          className={`absolute top-full z-20 right-9 text-black mt-1 ${
+            isDropdown ? "" : "hidden"
+          }`}
+        >
+          <BsFillTriangleFill />
+        </div>
+        <div
+          onMouseLeave={() => setIsDropdown(false)}
+          className={`absolute w-40 top-full right-7 mt-4 rounded-md py-2 bg-black z-10 ${
+            isDropdown ? "" : "hidden"
+          }`}
+        >
+          <Link className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2">
+            <FaRegUser className="text-xl text-red-700" /> Profile
+          </Link>
+          <Link className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2">
+            <FaFileInvoiceDollar className="text-xl text-red-700" /> Pay
+          </Link>
+          <hr className="w-full h-2" />
+          <Link
+            onClick={handleOnLogout}
+            className="flex items-center cursor-pointer gap-2 font-semibold px-10"
+          >
+            <FaFileInvoiceDollar className="text-xl text-red-700" /> Logout
+          </Link>
+        </div>
       </nav>
 
       {loginModal && (
@@ -60,8 +110,8 @@ const Navbar = () => {
             onClick={() => setLoginModal(!loginModal)}
           ></div>
           <Login
+            userState={userState}
             loginModal={setLoginModal}
-            isLoggedIn={setIsLoggedIn}
             className={"z-20"}
             toRegis={() => {
               setLoginModal(false);

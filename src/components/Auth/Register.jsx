@@ -18,6 +18,7 @@ const Register = ({ className, toLogin }) => {
       gender,
       address,
       phoneNumber,
+      isLoggedIn: false,
     };
 
     localStorage.setItem(localStorage.length + 1, JSON.stringify(userData));
