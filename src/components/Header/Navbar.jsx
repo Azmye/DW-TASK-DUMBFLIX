@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Register from "../Auth/Register";
 import { FaFileInvoiceDollar, FaRegUser, FaUser } from "react-icons/fa";
 import { BsFillTriangleFill } from "react-icons/bs";
+import { IoLogOut } from "react-icons/io5";
+import { MdDashboardCustomize } from "react-icons/md";
 
 const Navbar = ({ isLoggedIn, userState }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -89,22 +91,28 @@ const Navbar = ({ isLoggedIn, userState }) => {
         >
           <Link
             to={"/profile"}
-            className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2"
+            className="flex items-center cursor-pointer gap-2 font-semibold px-5 mb-2"
           >
             <FaRegUser className="text-xl text-red-700" /> Profile
           </Link>
           <Link
             to={"/user-payment"}
-            className="flex items-center cursor-pointer gap-2 font-semibold px-10 mb-2"
+            className="flex items-center cursor-pointer gap-2 font-semibold px-5 mb-2"
           >
             <FaFileInvoiceDollar className="text-xl text-red-700" /> Pay
+          </Link>
+          <Link
+            to={"/dashboard"}
+            className="flex items-center cursor-pointer gap-2 font-semibold px-5 mb-2"
+          >
+            <MdDashboardCustomize className="text-xl text-red-700" /> Dashboard
           </Link>
           <hr className="w-full h-2" />
           <Link
             onClick={handleOnLogout}
-            className="flex items-center cursor-pointer gap-2 font-semibold px-10"
+            className="flex items-center cursor-pointer gap-2 font-semibold px-5"
           >
-            <FaFileInvoiceDollar className="text-xl text-red-700" /> Logout
+            <IoLogOut className="text-xl text-red-700" /> Logout
           </Link>
         </div>
       </nav>

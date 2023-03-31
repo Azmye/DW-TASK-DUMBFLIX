@@ -1,7 +1,7 @@
 const UserPayment = () => {
   return (
     <div className="w-full ">
-      <h2 className="text-center text-3xl font-bold text-white mt-20">
+      <h2 className="text-center text-3xl font-bold text-white pt-20 pb-14">
         Premium
       </h2>
       <div className="my-5">

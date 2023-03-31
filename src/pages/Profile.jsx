@@ -5,7 +5,7 @@ import {
   FaPhone,
   FaUserCircle,
 } from "react-icons/fa";
-import profilePic from "../../assets/profile_pic.jpg";
+import profilePic from "../assets/profile_pic.jpg";
 import { BsGenderAmbiguous } from "react-icons/bs";
 import { useEffect, useState } from "react";
 

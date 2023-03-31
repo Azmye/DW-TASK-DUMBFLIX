@@ -2,7 +2,7 @@ import ApiConfig from "../../config/ApiConfig";
 import useFetch from "../../config/useFetch";
 import CardItem from "../CardItem";
 
-const ShowsLists = ({ className, slides }) => {
+const ShowsLists = ({ className, slides, linkTo }) => {
   const { data, loading, error } = useFetch("/tv/top_rated");
   const { tmdb_w500Image } = ApiConfig;
 
@@ -22,7 +22,7 @@ const ShowsLists = ({ className, slides }) => {
             .map((index) => (
               <CardItem
                 key={index.id}
-                linkto={`/shows-detail/${index.id}`}
+                linkto={`${linkTo}${index.id}`}
                 title={index.name}
                 year={new Date(index.first_air_date).getFullYear()}
                 className={`${slides ? "carousel-item px-5" : ""} w-48`}

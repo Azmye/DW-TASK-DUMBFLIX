@@ -5,16 +5,17 @@ import Movies from "./pages/Movies";
 import Shows from "./pages/Shows";
 import DetailsItem from "./components/DetailsItem";
 import { useEffect, useState } from "react";
-import Profile from "./components/User/Profile";
-import UserPayment from "./components/Payment/UserPayment";
+import Profile from "./pages/Profile";
+import UserPayment from "./pages/UserPayment";
 import UserPrivateRoute from "./components/UserPrivateRoute";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
+import AddItem from "./components/Admin/AddItem";
 
 const App = () => {
   document.body.classList = "bg-black";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userState, setUserState] = useState(0);
-  console.log(userState);
 
   useEffect(() => {
     // checking if there is user currently login
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/movies" element={<Movies />} />
           <Route path="/shows" element={<Shows />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route element={<UserPrivateRoute isLoggedIn={isLoggedIn} />}>
             <Route
               path="/profile"
@@ -53,6 +55,17 @@ const App = () => {
               path="/movie-detail/:id"
               element={<DetailsItem endpoint={"/movie/"} />}
             />
+
+            <Route
+              path="/movie-detail-admin/:id"
+              element={<DetailsItem admin={true} endpoint={"/movie/"} />}
+            />
+
+            <Route
+              path="/shows-detail-admin/:id"
+              element={<DetailsItem admin={true} endpoint={"/tv/"} />}
+            />
+            <Route path="/add-item" element={<AddItem />} />
           </Route>
         </Routes>
       </div>
