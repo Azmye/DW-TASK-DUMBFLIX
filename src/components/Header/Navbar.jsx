@@ -30,7 +30,7 @@ const Navbar = ({ isLoggedIn, userState }) => {
 
   return (
     <>
-      <nav className="bg-zinc-800 text-white py-3 relative">
+      <nav className="fixed left-0 right-0 bg-zinc-800 text-white py-3 z-50">
         <div className="container mx-auto flex justify-between items-center relative">
           <div>
             <ul className="flex gap-4 text-md">

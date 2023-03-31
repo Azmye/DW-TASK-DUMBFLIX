@@ -3,6 +3,7 @@ import thumbn from "../assets/movie-detail.png";
 import prevMov from "../assets/preview-movie.png";
 import useFetch from "../config/useFetch";
 import ApiConfig from "../config/ApiConfig";
+import { FaPlay } from "react-icons/fa";
 
 const DetailsItem = ({ endpoint }) => {
   const { id } = useParams();
@@ -10,18 +11,22 @@ const DetailsItem = ({ endpoint }) => {
   const { data, loading, error } = useFetch(`${endpoint}/${id}`);
 
   return (
-    <div>
+    <div className="pt-12">
       <div className="relative">
-        <div className="px-36">
-          {data && (
-            <img
-              src={`${tmdb_originalImage(data.data.backdrop_path)}`}
-              alt=""
-              className="mx-auto w-full"
-            />
-          )}
-        </div>
-        <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-500/20 z-10"></div>
+        {data && (
+          <>
+            <div className="px-36">
+              <img
+                src={`${tmdb_originalImage(data.data.backdrop_path)}`}
+                alt=""
+                className="mx-auto w-full"
+              />
+            </div>
+            <div className="absolute left-0 right-0 top-0 bottom-0 bg-zinc-500/40 z-10 flex justify-center items-center">
+              <FaPlay className="text-6xl hover:text-red-700 cursor-pointer" />
+            </div>
+          </>
+        )}
       </div>
       <div className="flex container mx-auto px-36 py-10 justify-center">
         <div className="w-2/3">
