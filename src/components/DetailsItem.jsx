@@ -1,18 +1,48 @@
 import { useParams } from "react-router-dom";
-import thumbn from "../assets/movie-detail.png";
-import prevMov from "../assets/preview-movie.png";
 import useFetch from "../config/useFetch";
 import ApiConfig from "../config/ApiConfig";
 import { FaPlay } from "react-icons/fa";
+import { useEffect } from "react";
+import ReactPlayer from "react-player";
 
 const DetailsItem = ({ endpoint }) => {
   const { id } = useParams();
   const { tmdb_w500Image, tmdb_originalImage } = ApiConfig;
   const { data, loading, error } = useFetch(`${endpoint}/${id}`);
 
+  useEffect(() => {
+    if (!loading) {
+      console.log(
+        data.data.videos.results.map((index) =>
+          console.log(`https://www.youtube.com/watch?v=${index.key}`)
+        )
+      );
+    }
+  }, [loading]);
+
   return (
     <div className="pt-12">
-      <div className="relative">
+      {data &&
+        data.data.videos.results.slice(0, 1).map((index) => (
+          <div className="relative h-[500px]">
+            <ReactPlayer
+              className={"absolute top-0 left-0"}
+              width={"100%"}
+              height={"100%"}
+              light={
+                <div className="px-40 h-[500px]">
+                  <img
+                    className="w-full h-[500px] mx-auto"
+                    src={`${tmdb_originalImage(data.data.backdrop_path)}`}
+                  />
+                </div>
+              }
+              controls={true}
+              url={`https://www.youtube.com/watch?v=${index.key}`}
+            />
+          </div>
+        ))}
+      {/* <div className="relative">
         {data && (
           <>
             <div className="px-36">
@@ -27,7 +57,7 @@ const DetailsItem = ({ endpoint }) => {
             </div>
           </>
         )}
-      </div>
+      </div> */}
       <div className="flex container mx-auto px-36 py-10 justify-center">
         <div className="w-2/3">
           <div className="flex">
