@@ -21,7 +21,7 @@ const Navbar = ({ isLoggedIn, userState }) => {
             i,
             JSON.stringify({ ...user, isLoggedIn: false })
           ),
-          userState(3),
+          userState(400),
           setIsDropdown(false)
         );
       }

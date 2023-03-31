@@ -30,7 +30,7 @@ const Login = ({ className, toRegis, loginModal, userState }) => {
             i,
             JSON.stringify({ ...users, isLoggedIn: true })
           ),
-          userState(5);
+          userState(200);
       }
     }
   };

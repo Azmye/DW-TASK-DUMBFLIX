@@ -7,6 +7,8 @@ import DetailsItem from "./components/DetailsItem";
 import { useEffect, useState } from "react";
 import Profile from "./components/User/Profile";
 import UserPayment from "./components/Payment/UserPayment";
+import UserPrivateRoute from "./components/UserPrivateRoute";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   document.body.classList = "bg-black";
@@ -20,10 +22,11 @@ const App = () => {
       const response = localStorage.getItem(i);
       const user = JSON.parse(response);
       if (user.isLoggedIn == true) {
-        setIsLoggedIn(true), setUserState(1);
+        return setIsLoggedIn(true), setUserState(1);
       } else {
         setIsLoggedIn(false);
       }
+      return;
     }
   }, [userState]);
 
@@ -35,16 +38,22 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/shows" element={<Shows />} />
-          <Route path="/profile" element={<Profile userState={userState} />} />
-          <Route path="/user-payment" element={<UserPayment />} />
-          <Route
-            path="/shows-detail/:id"
-            element={<DetailsItem endpoint={"/tv/"} />}
-          />
-          <Route
-            path="/movie-detail/:id"
-            element={<DetailsItem endpoint={"/movie/"} />}
-          />
+          <Route path="*" element={<NotFound />} />
+          <Route element={<UserPrivateRoute isLoggedIn={isLoggedIn} />}>
+            <Route
+              path="/profile"
+              element={<Profile userState={userState} />}
+            />
+            <Route path="/user-payment" element={<UserPayment />} />
+            <Route
+              path="/shows-detail/:id"
+              element={<DetailsItem endpoint={"/tv/"} />}
+            />
+            <Route
+              path="/movie-detail/:id"
+              element={<DetailsItem endpoint={"/movie/"} />}
+            />
+          </Route>
         </Routes>
       </div>
     </div>
