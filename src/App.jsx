@@ -11,11 +11,15 @@ import UserPrivateRoute from "./components/UserPrivateRoute";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import AddItem from "./components/Admin/AddItem";
+import UserTransaction from "./pages/UserTransaction";
+import UserRoutes from "./components/UserRoutes";
+import AdminPrivateRoutes from "./components/AdminPrivateRoutes";
 
 const App = () => {
   document.body.classList = "bg-black";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userState, setUserState] = useState(0);
+  const [userState, setUserState] = useState(200);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     // checking if there is user currently login
@@ -23,7 +27,7 @@ const App = () => {
       const response = localStorage.getItem(i);
       const user = JSON.parse(response);
       if (user.isLoggedIn == true) {
-        return setIsLoggedIn(true), setUserState(1);
+        return setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
       }
@@ -33,15 +37,44 @@ const App = () => {
 
   return (
     <div className="App">
-      <Navbar userState={setUserState} isLoggedIn={isLoggedIn} />
+      <Navbar userState={setUserState} isLoggedIn={isLoggedIn} admin={admin} />
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/shows" element={<Shows />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route element={<UserPrivateRoute isLoggedIn={isLoggedIn} />}>
+          <Route element={<UserRoutes admin={setAdmin} />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/shows" element={<Shows />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+
+          <Route
+            element={
+              <AdminPrivateRoutes
+                admin={setAdmin}
+                userState={userState}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          >
+            <Route
+              path="/movie-detail-admin/:id"
+              element={<DetailsItem admin={true} endpoint={"/movie/"} />}
+            />
+
+            <Route
+              path="/shows-detail-admin/:id"
+              element={<DetailsItem admin={true} endpoint={"/tv/"} />}
+            />
+            <Route path="/add-item" element={<AddItem />} />
+            <Route path="/transactions" element={<UserTransaction />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+
+          <Route
+            element={
+              <UserPrivateRoute userState={userState} isLoggedIn={isLoggedIn} />
+            }
+          >
             <Route
               path="/profile"
               element={<Profile userState={userState} />}
@@ -55,17 +88,6 @@ const App = () => {
               path="/movie-detail/:id"
               element={<DetailsItem endpoint={"/movie/"} />}
             />
-
-            <Route
-              path="/movie-detail-admin/:id"
-              element={<DetailsItem admin={true} endpoint={"/movie/"} />}
-            />
-
-            <Route
-              path="/shows-detail-admin/:id"
-              element={<DetailsItem admin={true} endpoint={"/tv/"} />}
-            />
-            <Route path="/add-item" element={<AddItem />} />
           </Route>
         </Routes>
       </div>

@@ -8,7 +8,7 @@ import { BsFillTriangleFill } from "react-icons/bs";
 import { IoLogOut } from "react-icons/io5";
 import { MdDashboardCustomize } from "react-icons/md";
 
-const Navbar = ({ isLoggedIn, userState }) => {
+const Navbar = ({ isLoggedIn, userState, admin }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
@@ -35,20 +35,33 @@ const Navbar = ({ isLoggedIn, userState }) => {
       <nav className="fixed left-0 right-0 bg-zinc-800 text-white py-3 z-50">
         <div className="container mx-auto flex justify-between items-center relative">
           <div>
-            <ul className="flex gap-4 text-md">
-              <li>
-                <Link to={"/"}>Home</Link>
-              </li>
-              <li>
-                <Link to={"/shows"}>TV Shows</Link>
-              </li>
-              <li>
-                <Link to={"/movies"}>Movies</Link>
-              </li>
-            </ul>
+            {admin ? (
+              <ul className="flex gap-4 text-md">
+                <li>
+                  <Link to={"/dashboard"}>Dashboard</Link>
+                </li>
+                <li>
+                  <Link to={"/transactions"}>Transactions</Link>
+                </li>
+              </ul>
+            ) : (
+              <ul className="flex gap-4 text-md">
+                <li>
+                  <Link to={"/"}>Home</Link>
+                </li>
+                <li>
+                  <Link to={"/shows"}>TV Shows</Link>
+                </li>
+                <li>
+                  <Link to={"/movies"}>Movies</Link>
+                </li>
+              </ul>
+            )}
           </div>
           <div className="w-24 ">
-            <img src={logo} alt="Brand Logo" className="w-full" />
+            <Link to={"/"}>
+              <img src={logo} alt="Brand Logo" className="w-full" />
+            </Link>
           </div>
           {isLoggedIn ? (
             <div className="ml-40">

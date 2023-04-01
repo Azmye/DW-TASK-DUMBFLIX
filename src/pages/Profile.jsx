@@ -22,7 +22,7 @@ const Profile = ({ userState }) => {
     }
   }, [userState]);
   return (
-    <div className="w-full pt-20 pb-44 ">
+    <div className="w-full pt-20 pb-44 h-[100vh]">
       <div className="w-1/2 m-auto  rounded-md bg-zinc-800 flex p-5">
         <div className="w-2/3">
           <h2 className="font-bold">Personal Info</h2>
