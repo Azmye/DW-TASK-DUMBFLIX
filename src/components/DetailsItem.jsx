@@ -14,11 +14,7 @@ const DetailsItem = ({ endpoint, admin }) => {
 
   useEffect(() => {
     if (!loading) {
-      console.log(
-        data.data.videos.results.map((index) =>
-          console.log(`https://www.youtube.com/watch?v=${index.key}`)
-        )
-      );
+      console.log(data);
     }
   }, [loading]);
 
@@ -47,7 +43,6 @@ const DetailsItem = ({ endpoint, admin }) => {
 
       {admin && (
         <div className="contianer mx-auto px-36 pt-5 flex justify-end">
-          {console.log(isModal)}
           <button
             onClick={() => setIsModal(true)}
             className="px-3 py-1 rounded-md text-white bg-red-700"
