@@ -18,8 +18,9 @@ import AdminPrivateRoutes from "./components/AdminPrivateRoutes";
 const App = () => {
   document.body.classList = "bg-black";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userState, setUserState] = useState(200);
+  const [userState, setUserState] = useState(0);
   const [admin, setAdmin] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   useEffect(() => {
     // checking if there is user currently login
@@ -33,11 +34,18 @@ const App = () => {
       }
       return;
     }
-  }, [userState]);
+  }, []);
 
   return (
     <div className="App">
-      <Navbar userState={setUserState} isLoggedIn={isLoggedIn} admin={admin} />
+      <Navbar
+        userState={setUserState}
+        setLogin={setIsLoggedIn}
+        setLoginModal={setLoginModal}
+        loginModal={loginModal}
+        isLoggedIn={isLoggedIn}
+        admin={admin}
+      />
       <div className="content">
         <Routes>
           <Route element={<UserRoutes admin={setAdmin} />}>
@@ -72,7 +80,11 @@ const App = () => {
 
           <Route
             element={
-              <UserPrivateRoute userState={userState} isLoggedIn={isLoggedIn} />
+              <UserPrivateRoute
+                setLoginModal={setLoginModal}
+                userState={userState}
+                isLoggedIn={isLoggedIn}
+              />
             }
           >
             <Route

@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-const UserPrivateRoute = ({ isLoggedIn }) => {
+const UserPrivateRoute = ({ isLoggedIn, setLoginModal }) => {
   if (isLoggedIn) {
     return <Outlet />;
   } else {
-    return <Navigate to={"/"} />;
+    return setLoginModal(true), (<Navigate to={"/"} />);
   }
 };
 

@@ -26,7 +26,7 @@ const Register = ({ className, toLogin, registerModal }) => {
   };
   return (
     <div
-      className={`absolute mt-10 rounded-md  bg-black/80 w-72 text-white p-5 ${className}`}
+      className={`absolute mt-20 rounded-md  bg-black/80 w-72 text-white p-5 ${className}`}
     >
       <h2 className="font-semibold text-lg mb-4">REGISTER</h2>
       <form onSubmit={handleOnSubmit}>

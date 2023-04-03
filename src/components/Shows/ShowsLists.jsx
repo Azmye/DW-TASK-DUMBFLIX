@@ -17,7 +17,7 @@ const ShowsLists = ({ className, slides, linkTo }) => {
         {error && console.log(error.message)}
         {loading && <h2>Loading...</h2>}
         {data &&
-          data.data.results
+          data?.data.results
             .slice(0, 12)
             .map((index) => (
               <CardItem

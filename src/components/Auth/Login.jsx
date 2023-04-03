@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = ({ className, toRegis, loginModal, userState }) => {
+const Login = ({ className, toRegis, loginModal, userState, setLogin }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -30,7 +30,7 @@ const Login = ({ className, toRegis, loginModal, userState }) => {
             i,
             JSON.stringify({ ...users, isLoggedIn: true })
           ),
-          userState(200);
+          setLogin(true);
       }
     }
   };

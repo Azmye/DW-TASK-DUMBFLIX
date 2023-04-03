@@ -8,8 +8,14 @@ import { BsFillTriangleFill } from "react-icons/bs";
 import { IoLogOut } from "react-icons/io5";
 import { MdDashboardCustomize } from "react-icons/md";
 
-const Navbar = ({ isLoggedIn, userState, admin }) => {
-  const [loginModal, setLoginModal] = useState(false);
+const Navbar = ({
+  isLoggedIn,
+  userState,
+  admin,
+  setLogin,
+  setLoginModal,
+  loginModal,
+}) => {
   const [registerModal, setRegisterModal] = useState(false);
   const [isDropdown, setIsDropdown] = useState(false);
 
@@ -24,6 +30,7 @@ const Navbar = ({ isLoggedIn, userState, admin }) => {
             JSON.stringify({ ...user, isLoggedIn: false })
           ),
           userState(400),
+          setLogin(false),
           setIsDropdown(false)
         );
       }
@@ -139,6 +146,7 @@ const Navbar = ({ isLoggedIn, userState, admin }) => {
           <Login
             userState={userState}
             loginModal={setLoginModal}
+            setLogin={setLogin}
             className={"z-20"}
             toRegis={() => {
               setLoginModal(false);
